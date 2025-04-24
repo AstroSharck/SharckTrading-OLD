@@ -1,8 +1,17 @@
-const checkVolatility = require('./context/volatilityChecker');
+const { isMarketScalpable } = require('./context/marketStatus');
 
 (async () => {
-    const results = await checkVolatility({ returnFullList: true });
+    const { marketOk, scalpables } = await isMarketScalpable();
 
-    const scalpables = results.filter(r => r.scalpable);
-    console.table(scalpables);
+    if (marketOk) {
+        console.log("✅ Le marché est propice au scalping !");
+        console.table(scalpables.map(a => ({
+            symbol: a.symbol,
+            volatility: a.volatility,
+            volume: a.volume,
+            spread: a.spread
+        })));
+    } else {
+        console.log("⛔ Marché inadapté au scalping actuellement.");
+    }
 })();

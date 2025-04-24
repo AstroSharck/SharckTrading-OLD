@@ -1,16 +1,25 @@
-// marketStatus.js
 const checkVolatility = require('./volatilityChecker');
 const fetchNews = require('./newsFetcher');
 
-async function isMarketScalpable() {
-    const volatility = await checkVolatility();
+async function isMarketScalpable({ verbose = true } = {}) {
+    // 1. Analyse news
     const news = await fetchNews();
+    const marketIsStable = !news.match(/crash|panic|inflation|recession/i);
 
-    // Logique simple de décision (à affiner plus tard)
-    const marketIsStable = !news.includes('crash') && !news.includes('high risk');
-    const marketHasVolatility = volatility >= 0.5; // À ajuster selon ton échelle
+    // 2. Analyse volatilité + actifs scalpables
+    const fullScan = await checkVolatility({ returnFullList: true });
+    const scalpables = fullScan.filter(asset => asset.scalpable);
+    const avgVolatility = fullScan.reduce((a, b) => a + b.volatility, 0) / fullScan.length;
 
-    return marketHasVolatility && marketIsStable;
+    if (verbose) {
+        console.log("🧠 Vérification du contexte marché...");
+        console.log("📰 News ok :", marketIsStable);
+        console.log("📈 Volatilité moyenne :", avgVolatility.toFixed(2) + "%");
+        console.log("💥 Actifs scalpables :", scalpables.length);
+    }
+
+    const marketOk = marketIsStable && avgVolatility >= 1 && scalpables.length >= 10;
+    return { marketOk, avgVolatility, scalpables };
 }
 
 module.exports = { isMarketScalpable };

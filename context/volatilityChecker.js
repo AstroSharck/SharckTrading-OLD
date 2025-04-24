@@ -1,33 +1,36 @@
 const axios = require('axios');
+const limit = require('p-limit')(5);
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
 
 async function getAllUSDTMarkets() {
     try {
         const res = await axios.get('https://api.binance.com/api/v3/exchangeInfo');
-        const symbols = res.data.symbols
+        return res.data.symbols
             .filter(s => s.symbol.endsWith('USDT') && s.status === 'TRADING' && s.quoteAsset === 'USDT')
             .map(s => s.symbol);
-        return symbols;
     } catch (err) {
-        console.error('[getAllUSDTMarkets] Error:', err.message);
+        console.error('[getAllUSDTMarkets] Erreur :', err.message);
         return [];
     }
 }
 
 async function calculateAssetData(symbol) {
     try {
-        const klinesRes = await axios.get(`https://api.binance.com/api/v3/klines`, {
+        const klineRes = await axios.get('https://api.binance.com/api/v3/klines', {
             params: { symbol, interval: '1m', limit: 60 }
         });
 
-        const prices = klinesRes.data.map(c => parseFloat(c[4])); // close prices
-        const volumes = klinesRes.data.map(c => parseFloat(c[5])); // volume
-
-        const maxPrice = Math.max(...prices);
-        const minPrice = Math.min(...prices);
+        const prices = klineRes.data.map(c => parseFloat(c[4]));
+        const volumes = klineRes.data.map(c => parseFloat(c[5]));
+        const max = Math.max(...prices);
+        const min = Math.min(...prices);
         const avgVolume = volumes.reduce((a, b) => a + b, 0) / volumes.length;
-        const volatility = ((maxPrice - minPrice) / minPrice) * 100;
+        const volatility = ((max - min) / min) * 100;
 
-        const depthRes = await axios.get(`https://api.binance.com/api/v3/depth`, {
+        const depthRes = await axios.get('https://api.binance.com/api/v3/depth', {
             params: { symbol, limit: 5 }
         });
 
@@ -45,22 +48,41 @@ async function calculateAssetData(symbol) {
             scalpable
         };
     } catch (err) {
+        console.warn(`[${symbol}] Erreur : ${err.message}`);
         return null;
     }
 }
 
-async function checkVolatility({ topLimit = 50, returnFullList = false } = {}) {
-    const markets = await getAllUSDTMarkets();
-    console.log(`[checkVolatility] Found ${markets.length} USDT markets.`);
-    const topMarkets = markets.slice(0, topLimit);
+async function processAll(symbols, batchSize = 20) {
+    const results = [];
+    for (let i = 0; i < symbols.length; i += batchSize) {
+        const batch = symbols.slice(i, i + batchSize);
+        console.log(`🔄 Traitement batch ${i / batchSize + 1} / ${Math.ceil(symbols.length / batchSize)}...`);
 
-    const results = await Promise.all(topMarkets.map(s => calculateAssetData(s)));
-    const cleanResults = results.filter(Boolean);
+        const batchResults = await Promise.all(
+            batch.map(symbol => limit(() => calculateAssetData(symbol)))
+        );
 
-    if (returnFullList) return cleanResults;
+        const success = batchResults.filter(Boolean).length;
+        const fail = batch.length - success;
+        console.log(`✅ Succès : ${success} | ❌ Erreurs : ${fail}`);
+        results.push(...batchResults.filter(Boolean));
 
-    const avgVolatility = cleanResults.reduce((sum, a) => sum + a.volatility, 0) / cleanResults.length;
-    return parseFloat(avgVolatility.toFixed(2));
+        await new Promise(r => setTimeout(r, 500)); // petite pause
+    }
+    return results;
+}
+
+async function checkVolatility({ returnFullList = false } = {}) {
+    const markets = shuffle(await getAllUSDTMarkets());
+
+    console.log(`🎯 Cryptos détectées : ${markets.length}`);
+    const allResults = await processAll(markets);
+
+    if (returnFullList) return allResults;
+
+    const avgVol = allResults.reduce((sum, r) => sum + r.volatility, 0) / allResults.length;
+    return parseFloat(avgVol.toFixed(2));
 }
 
 module.exports = checkVolatility;

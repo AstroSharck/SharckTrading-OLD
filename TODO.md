@@ -7,9 +7,9 @@
 - [x] Installer les libs de base (`dotenv`, `axios`, `chalk`, `technicalindicators`, etc.)
 
 ## 🌐 Phase 2 – Analyse de Contexte Marché
-- [ ] `context/volatilityChecker.js` – Détection de volatilité globale
-- [ ] `context/newsFetcher.js` – Intégration de l’analyse de news économiques
-- [ ] `context/marketStatus.js` – Décision : marché propice au scalping ?
+- [x] `context/volatilityChecker.js` – Détection de volatilité globale
+- [x] `context/newsFetcher.js` – Intégration de l’analyse de news économiques
+- [x] `context/marketStatus.js` – Décision : marché propice au scalping ?
 
 ## 🔍 Phase 3 – Scanner d’Actifs Scalpables
 - [ ] `scanner/binanceScanner.js` – Récupérer tous les actifs USDT sur Binance
