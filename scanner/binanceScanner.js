@@ -8,23 +8,14 @@ async function getScalpableAssets({ verbose = true } = {}) {
         return [];
     }
 
-    console.table(
-        scalpables.map(a => ({
-            symbol: a.symbol,
-            volatility: a.volatility,
-            volume: a.volume,
-            spread: a.spread,
-            score: a.score
-        }))
-    );
-
+    const symbols = scalpables.map(a => a.symbol);
 
     if (verbose) {
         /* console.log(`✅ ${symbols.length} actifs sélectionnés pour le scalping :`);
         console.log(symbols.join(', ')); */
     }
 
-    /* return symbols; */
+    return scalpables;
 }
 
 module.exports = { getScalpableAssets };
