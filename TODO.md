@@ -12,9 +12,9 @@
 - [x] `context/marketStatus.js` – Décision : marché propice au scalping ?
 
 ## 🔍 Phase 3 – Scanner d’Actifs Scalpables
-- [ ] `scanner/binanceScanner.js` – Récupérer tous les actifs USDT sur Binance
+- [x] `scanner/binanceScanner.js` – Récupérer tous les actifs USDT sur Binance
 - [ ] `scanner/forexScanner.js` – Intégrer une API Forex (TwelveData, etc.)
-- [ ] `scanner/assetScorer.js` – Filtres personnalisés (volatilité, volume, etc.)
+- [x] `scanner/assetScorer.js` – Filtres personnalisés (volatilité, volume, etc.)
 - [ ] Gestion WebSocket dynamique (ouvrir/fermer selon pertinence des actifs)
 
 ## 📈 Phase 4 – Indicateurs Techniques

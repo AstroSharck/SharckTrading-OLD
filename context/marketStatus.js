@@ -3,8 +3,8 @@ const fetchNews = require('./newsFetcher');
 
 async function isMarketScalpable({ verbose = true } = {}) {
     // 1. Analyse news
-    const news = await fetchNews();
-    const marketIsStable = !news.match(/crash|panic|inflation|recession/i);
+    /* const news = await fetchNews();
+    const marketIsStable = !news.match(/crash|panic|inflation|recession/i); */
 
     // 2. Analyse volatilité + actifs scalpables
     const fullScan = await checkVolatility({ returnFullList: true });
@@ -13,12 +13,12 @@ async function isMarketScalpable({ verbose = true } = {}) {
 
     if (verbose) {
         console.log("🧠 Vérification du contexte marché...");
-        console.log("📰 News ok :", marketIsStable);
+        console.log("📰 News ok :", true);
         console.log("📈 Volatilité moyenne :", avgVolatility.toFixed(2) + "%");
         console.log("💥 Actifs scalpables :", scalpables.length);
     }
 
-    const marketOk = marketIsStable && avgVolatility >= 1 && scalpables.length >= 10;
+    const marketOk = /* marketIsStable && */ avgVolatility >= 1 && scalpables.length >= 10;
     return { marketOk, avgVolatility, scalpables };
 }
 

@@ -1,5 +1,6 @@
 const axios = require('axios');
 const limit = require('p-limit')(5);
+const { isScalpable, getScalpScore } = require('../scanner/assetScorer');
 
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
@@ -38,14 +39,17 @@ async function calculateAssetData(symbol) {
         const bestAsk = parseFloat(depthRes.data.asks[0][0]);
         const spread = ((bestAsk - bestBid) / bestBid) * 100;
 
-        const scalpable = volatility > 1 && avgVolume > 100000 && spread < 0.2;
+
+        const scalpable = isScalpable({ volatility, volume: avgVolume, spread });
+        const score = getScalpScore({ volatility, volume: avgVolume, spread });
 
         return {
             symbol,
             volatility: parseFloat(volatility.toFixed(2)),
             volume: Math.round(avgVolume),
             spread: parseFloat(spread.toFixed(3)),
-            scalpable
+            scalpable,
+            score
         };
     } catch (err) {
         console.warn(`[${symbol}] Erreur : ${err.message}`);
@@ -57,7 +61,6 @@ async function processAll(symbols, batchSize = 20) {
     const results = [];
     for (let i = 0; i < symbols.length; i += batchSize) {
         const batch = symbols.slice(i, i + batchSize);
-        console.log(`🔄 Traitement batch ${i / batchSize + 1} / ${Math.ceil(symbols.length / batchSize)}...`);
 
         const batchResults = await Promise.all(
             batch.map(symbol => limit(() => calculateAssetData(symbol)))
@@ -65,7 +68,6 @@ async function processAll(symbols, batchSize = 20) {
 
         const success = batchResults.filter(Boolean).length;
         const fail = batch.length - success;
-        console.log(`✅ Succès : ${success} | ❌ Erreurs : ${fail}`);
         results.push(...batchResults.filter(Boolean));
 
         await new Promise(r => setTimeout(r, 500)); // petite pause
@@ -76,7 +78,6 @@ async function processAll(symbols, batchSize = 20) {
 async function checkVolatility({ returnFullList = false } = {}) {
     const markets = shuffle(await getAllUSDTMarkets());
 
-    console.log(`🎯 Cryptos détectées : ${markets.length}`);
     const allResults = await processAll(markets);
 
     if (returnFullList) return allResults;

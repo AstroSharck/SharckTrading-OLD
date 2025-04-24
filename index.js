@@ -1,17 +1,6 @@
-const { isMarketScalpable } = require('./context/marketStatus');
+const { getScalpableAssets } = require('./scanner/binanceScanner');
 
 (async () => {
-    const { marketOk, scalpables } = await isMarketScalpable();
-
-    if (marketOk) {
-        console.log("✅ Le marché est propice au scalping !");
-        console.table(scalpables.map(a => ({
-            symbol: a.symbol,
-            volatility: a.volatility,
-            volume: a.volume,
-            spread: a.spread
-        })));
-    } else {
-        console.log("⛔ Marché inadapté au scalping actuellement.");
-    }
+    console.log("🔍 Vérification des actifs scalpables sur Binance...");
+    const scalpables = await getScalpableAssets();
 })();
