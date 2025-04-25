@@ -1,4 +1,5 @@
 const WebSocket = require('ws');
+const { getAllOpenPositions, closePosition, isPositionOpen } = require('../trading/positionController');
 
 const activeSockets = new Map();
 
@@ -18,9 +19,11 @@ function startWebSocketFor(symbol, onData) {
 
     ws.on('message', (data) => {
         const json = JSON.parse(data);
-        const price = parseFloat(json.k.c); // close price
-        const volume = parseFloat(json.k.v); // volume 1m
+        const price = parseFloat(json.k.c); // prix de clôture live
+        const volume = parseFloat(json.k.v);
+
         onData(symbol, price, volume, json);
+        handleLiveTick(symbol, price); // <== intégration ici
     });
 
     ws.on('close', () => {
@@ -51,12 +54,44 @@ function stopAllSockets() {
 }
 
 function watchScalpables(symbols, onData) {
-    const limit = 50; // sécurité anti-flood
-    stopAllSockets();
+    if (!Array.isArray(symbols) || symbols.length === 0) return;
 
-    const list = symbols.slice(0, limit);
-    for (const symbol of list) {
+    const limit = 50;
+    const scalpList = symbols.slice(0, limit);
+
+    // 🔒 Récupérer les positions ouvertes
+    const locked = getAllOpenPositions().map(p => p.symbol);
+
+    // 👇 Ne pas fermer les WebSockets des actifs verrouillés
+    const keepAlive = new Set(locked);
+
+    // Fermer uniquement ceux qui ne sont plus scalpables ET pas en trade
+    for (const [symbol, socket] of activeSockets.entries()) {
+        if (!scalpList.includes(symbol) && !keepAlive.has(symbol)) {
+            stopWebSocketFor(symbol);
+        }
+    }
+
+    // Ouvrir tous ceux qui sont nouveaux ou manquants
+    const toWatch = [...new Set([...scalpList, ...locked])];
+    for (const symbol of toWatch) {
         startWebSocketFor(symbol, onData);
+    }
+}
+
+
+function handleLiveTick(symbol, price) {
+    const pos = getAllOpenPositions().find(p => p.symbol === symbol);
+    if (!pos) return;
+
+    const hitTP = pos.direction === 'buy' && price >= pos.tp;
+    const hitSL = pos.direction === 'buy' && price <= pos.sl;
+    const hitTPShort = pos.direction === 'sell' && price <= pos.tp;
+    const hitSLShort = pos.direction === 'sell' && price >= pos.sl;
+
+    if (hitTP || hitSL || hitTPShort || hitSLShort) {
+        console.log(`⚡️ TP/SL atteint pour ${symbol} → Fermeture à ${price}`);
+        closePosition(symbol, price);
     }
 }
 
@@ -64,5 +99,6 @@ module.exports = {
     startWebSocketFor,
     stopWebSocketFor,
     stopAllSockets,
-    watchScalpables
+    watchScalpables,
+    handleLiveTick
 };

@@ -15,17 +15,17 @@
 - [x] `scanner/binanceScanner.js` – Récupérer tous les actifs USDT sur Binance
 - [ ] `scanner/forexScanner.js` – Intégrer une API Forex (TwelveData, etc.)
 - [x] `scanner/assetScorer.js` – Filtres personnalisés (volatilité, volume, etc.)
-- [ ] Gestion WebSocket dynamique (ouvrir/fermer selon pertinence des actifs)
+- [x] Gestion WebSocket dynamique (ouvrir/fermer selon pertinence des actifs)
 
 ## 📈 Phase 4 – Indicateurs Techniques
-- [ ] `core/indicators.js` – Calcul EMA9, EMA21, RSI(7), VWAP, MACD, BB, Volume
-- [ ] `core/signalDetector.js` – Détection des signaux BUY/SELL
+- [x] `core/indicators.js` – Calcul EMA9, EMA21, RSI(7), VWAP, MACD, BB, Volume
+- [x] `core/signalDetector.js` – Détection des signaux BUY/SELL
 
 ## 🧠 Phase 5 – Prise de Décision
-- [ ] `core/strategyManager.js` – Centralisation des stratégies
-- [ ] `trading/tradeManager.js` – Logique de prise de position
+- [x] `core/strategyManager.js` – Centralisation des stratégies
+- [x] `trading/tradeManager.js` – Logique de prise de position
 - [ ] `trading/riskManager.js` – Gestion des risques et du capital
-- [ ] `trading/positionController.js` – Gestion des ordres
+- [x] `trading/positionController.js` – Gestion des ordres
 
 ## 🧪 Phase 6 – Backtesting
 - [ ] `backtest/backtestEngine.js` – Simuler les stratégies sur données passées
@@ -38,8 +38,8 @@
 - [ ] `learning/mistakeAnalyzer.js` – Analyse d’erreurs et d’opportunités manquées
 
 ## 🔐 Sécurité & Robustesse
-- [ ] Utiliser `.env` pour stocker les clés API
-- [ ] Sécuriser tous les appels API avec `try/catch`
+- [x] Utiliser `.env` pour stocker les clés API
+- [x] Sécuriser tous les appels API avec `try/catch`
 - [ ] Implémenter un système de failover (reconnect, log, alerte)
 
 ---

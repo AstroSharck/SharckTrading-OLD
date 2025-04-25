@@ -1,41 +1,37 @@
 const { getScalpableAssets } = require('./scanner/binanceScanner');
+const { analyzeMultiple } = require('./core/strategyManager');
+const { tryEnterTrade } = require('./trading/tradeManager');
 const { watchScalpables } = require('./scanner/socketManager');
 
 let currentSymbols = [];
 
-async function updateScalpablesLive() {
-    console.log("🔁 Scan live du marché en cours...");
+async function loopTrade() {
+    console.log("🔁 [loopTrade] Scan marché + stratégie...");
 
-    const assets = await getScalpableAssets({ verbose: false });
-
-    if (!assets || assets.length === 0) {
-        console.log("⚠️ Aucun actif scalpable détecté. Attente avant prochain scan.");
-        return;
-    }
-
-    // Juste les symboles à suivre en live
+    const assets = await getScalpableAssets();
     const symbols = assets.map(a => a.symbol);
-    console.table(assets.map(a => ({
-        symbol: a.symbol,
-        volatility: a.volatility,
-        volume: a.volume,
-        spread: a.spread,
-        score: a.score
-    })));
 
-    // Appliquer les sockets seulement si la liste a changé
+    // Lancer WebSocket uniquement si les symboles ont changé
     if (symbols.join(',') !== currentSymbols.join(',')) {
         currentSymbols = symbols;
-        watchScalpables(symbols, (symbol, price, volume, raw) => {
-            console.log(`📈 ${symbol} | prix: ${price} | volume: ${volume}`);
+        watchScalpables(symbols, (symbol, price) => {
+            const { handleLiveTick } = require('./scanner/socketManager');
+            handleLiveTick(symbol, price);
         });
-    } else {
-        console.log("⏸️ Pas de changement, sockets inchangés.");
     }
+
+    // Analyser les actifs et tenter d'entrer en position
+    const results = await analyzeMultiple(symbols);
+
+    for (const asset of results) {
+        tryEnterTrade(asset.symbol, asset);
+    }
+
+    console.log(`✅ ${results.length} actifs analysés.`);
 }
 
-// Lancer une première fois immédiatement
-updateScalpablesLive();
+// Lancer immédiatement
+loopTrade();
 
 // Puis toutes les 5 minutes
-setInterval(updateScalpablesLive, 5 * 60 * 1000);
+setInterval(loopTrade, 5 * 60 * 1000);
