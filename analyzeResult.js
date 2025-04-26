@@ -1,6 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
+function formatDate(timestamp) {
+    if (!timestamp) return '—';
+    const date = new Date(timestamp);
+    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+}
+
 // Charger les trades
 function loadTrades() {
     const filepath = path.join(__dirname, 'data', 'trade_history.json');
@@ -37,6 +43,8 @@ function printTable(trades, title) {
         Direction: t.direction,
         'Entry Price': t.entryPrice,
         'Close Price': t.closePrice || 'Ouvert',
+        'Open Time': formatDate(t.openTime),
+        'Close Time': t.closeTime ? formatDate(t.closeTime) : 'En cours',
         'PnL (%)': t.pnlPct !== undefined ? t.pnlPct.toFixed(2) : 'En cours'
     })));
 }
