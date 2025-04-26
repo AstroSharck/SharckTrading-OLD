@@ -77,6 +77,7 @@ async function processAll(symbols, batchSize = 20) {
 
 async function checkVolatility({ returnFullList = false } = {}) {
     const markets = shuffle(await getAllUSDTMarkets());
+    console.log(`🔍 Vérification de ${markets.length} actifs...`);
 
     const allResults = await processAll(markets);
 

@@ -1,0 +1,490 @@
+[
+  {
+    "symbol": "PNUTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.1786,
+    "tp": 0.182172,
+    "sl": 0.176814,
+    "openTime": 1745628395319,
+    "closePrice": 0.1768,
+    "closeTime": 1745629583441,
+    "pnlPct": -1.01,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "TFUELUSDT",
+    "direction": "buy",
+    "entryPrice": 0.03979,
+    "tp": 0.0405858,
+    "sl": 0.0393921,
+    "openTime": 1745628395320,
+    "closePrice": 0.03938,
+    "closeTime": 1745628505190,
+    "pnlPct": -1.03,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "TUTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.02742,
+    "tp": 0.0279684,
+    "sl": 0.0271458,
+    "openTime": 1745628395320,
+    "closePrice": 0.02797,
+    "closeTime": 1745631227668,
+    "pnlPct": 2.01,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "WLDUSDT",
+    "direction": "buy",
+    "entryPrice": 1.146,
+    "tp": 1.16892,
+    "sl": 1.1345399999999999,
+    "openTime": 1745628395321,
+    "closePrice": 1.169,
+    "closeTime": 1745630740916,
+    "pnlPct": 2.01,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "WCTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.4255,
+    "tp": 0.43401,
+    "sl": 0.421245,
+    "openTime": 1745628693834,
+    "closePrice": 0.4212,
+    "closeTime": 1745629065750,
+    "pnlPct": -1.01,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "NEIROUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00024772,
+    "tp": 0.0002526744,
+    "sl": 0.0002452428,
+    "openTime": 1745628693836,
+    "closePrice": 0.00025307,
+    "closeTime": 1745630437419,
+    "pnlPct": 2.16,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "TURBOUSDT",
+    "direction": "buy",
+    "entryPrice": 0.004517,
+    "tp": 0.004607340000000001,
+    "sl": 0.00447183,
+    "openTime": 1745628993507,
+    "closePrice": 0.004618,
+    "closeTime": 1745631229393,
+    "pnlPct": 2.24,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "AIXBTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.1291,
+    "tp": 0.131682,
+    "sl": 0.12780899999999998,
+    "openTime": 1745628993508,
+    "closePrice": 0.1278,
+    "closeTime": 1745629327565,
+    "pnlPct": -1.01,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "LEVERUSDT",
+    "direction": "buy",
+    "entryPrice": 0.000799,
+    "tp": 0.00081498,
+    "sl": 0.00079101,
+    "openTime": 1745628993509,
+    "closePrice": 0.000815,
+    "closeTime": 1745629932792,
+    "pnlPct": 2,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "GUNUSDT",
+    "direction": "buy",
+    "entryPrice": 0.05866,
+    "tp": 0.059833199999999996,
+    "sl": 0.0580734,
+    "openTime": 1745629292943,
+    "closePrice": 0.05793,
+    "closeTime": 1745629473715,
+    "pnlPct": -1.24,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "MEMEUSDT",
+    "direction": "buy",
+    "entryPrice": 0.002252,
+    "tp": 0.00229704,
+    "sl": 0.0022294800000000003,
+    "openTime": 1745629292945,
+    "closePrice": 0.0023,
+    "closeTime": 1745631224973,
+    "pnlPct": 2.13,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "ACTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0608,
+    "tp": 0.062016,
+    "sl": 0.060192,
+    "openTime": 1745629594279,
+    "closePrice": 0.0621,
+    "closeTime": 1745631339422,
+    "pnlPct": 2.14,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "WCTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.4277,
+    "tp": 0.43625400000000003,
+    "sl": 0.423423,
+    "openTime": 1745629895756,
+    "closePrice": 0.4229,
+    "closeTime": 1745630109729,
+    "pnlPct": -1.12,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "BONKUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00001987,
+    "tp": 0.000020267400000000002,
+    "sl": 0.000019671300000000003,
+    "openTime": 1745630498256,
+    "closePrice": 0.00002035,
+    "closeTime": 1745631331037,
+    "pnlPct": 2.42,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "WCTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.4277,
+    "tp": 0.43625400000000003,
+    "sl": 0.423423,
+    "openTime": 1745630498257,
+    "closePrice": 0.4366,
+    "closeTime": 1745630725715,
+    "pnlPct": 2.08,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "1000CATUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00744,
+    "tp": 0.007588800000000001,
+    "sl": 0.007365600000000001,
+    "openTime": 1745630796851,
+    "closePrice": 0.00762,
+    "closeTime": 1745631227502,
+    "pnlPct": 2.42,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "DOGSUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0001534,
+    "tp": 0.000156468,
+    "sl": 0.00015186599999999999,
+    "openTime": 1745630796852,
+    "closePrice": 0.0001565,
+    "closeTime": 1745631371356,
+    "pnlPct": 2.02,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "NEIROUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00025264,
+    "tp": 0.0002576928,
+    "sl": 0.0002501136,
+    "openTime": 1745630796853,
+    "closePrice": 0.00025779,
+    "closeTime": 1745631225381,
+    "pnlPct": 2.04,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "LEVERUSDT",
+    "direction": "buy",
+    "entryPrice": 0.000821,
+    "tp": 0.0008374200000000001,
+    "sl": 0.00081279,
+    "openTime": 1745630796853,
+    "closePrice": 0.000838,
+    "closeTime": 1745632212704,
+    "pnlPct": 2.07,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "AMPUSDT",
+    "direction": "buy",
+    "entryPrice": 0.004209,
+    "tp": 0.00429318,
+    "sl": 0.00416691,
+    "openTime": 1745631097161
+  },
+  {
+    "symbol": "WLDUSDT",
+    "direction": "buy",
+    "entryPrice": 1.177,
+    "tp": 1.2005400000000002,
+    "sl": 1.16523,
+    "openTime": 1745631097162,
+    "closePrice": 1.165,
+    "closeTime": 1745631632895,
+    "pnlPct": -1.02,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "PNUTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.182,
+    "tp": 0.18564,
+    "sl": 0.18018,
+    "openTime": 1745631097163
+  },
+  {
+    "symbol": "VOXELUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0817,
+    "tp": 0.08333399999999999,
+    "sl": 0.080883,
+    "openTime": 1745631399040,
+    "closePrice": 0.0808,
+    "closeTime": 1745631778458,
+    "pnlPct": -1.1,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "PENGUUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00898,
+    "tp": 0.0091596,
+    "sl": 0.008890200000000001,
+    "openTime": 1745631696758
+  },
+  {
+    "symbol": "NEIROUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00025922,
+    "tp": 0.0002644044,
+    "sl": 0.0002566278,
+    "openTime": 1745631696760
+  },
+  {
+    "symbol": "ACTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0619,
+    "tp": 0.063138,
+    "sl": 0.061280999999999995,
+    "openTime": 1745631696761
+  },
+  {
+    "symbol": "BONKUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00002017,
+    "tp": 0.0000205734,
+    "sl": 0.000019968299999999997,
+    "openTime": 1745631696761,
+    "closePrice": 0.00002064,
+    "closeTime": 1745632219032,
+    "pnlPct": 2.33,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "REZUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0154,
+    "tp": 0.015708,
+    "sl": 0.015246000000000001,
+    "openTime": 1745631696762
+  },
+  {
+    "symbol": "BABYUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0793,
+    "tp": 0.080886,
+    "sl": 0.078507,
+    "openTime": 1745631696762
+  },
+  {
+    "symbol": "RDNTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.02828,
+    "tp": 0.0288456,
+    "sl": 0.0279972,
+    "openTime": 1745631696765
+  },
+  {
+    "symbol": "REIUSDT",
+    "direction": "buy",
+    "entryPrice": 0.02827,
+    "tp": 0.0288354,
+    "sl": 0.0279873,
+    "openTime": 1745631696767
+  },
+  {
+    "symbol": "ONEUSDT",
+    "direction": "buy",
+    "entryPrice": 0.01402,
+    "tp": 0.0143004,
+    "sl": 0.0138798,
+    "openTime": 1745631696767
+  },
+  {
+    "symbol": "BOMEUSDT",
+    "direction": "buy",
+    "entryPrice": 0.001677,
+    "tp": 0.0017105400000000002,
+    "sl": 0.0016602300000000002,
+    "openTime": 1745631696768
+  },
+  {
+    "symbol": "RSRUSDT",
+    "direction": "buy",
+    "entryPrice": 0.009617,
+    "tp": 0.009809340000000001,
+    "sl": 0.009520830000000001,
+    "openTime": 1745631696769
+  },
+  {
+    "symbol": "LUNCUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00006569,
+    "tp": 0.00006700380000000001,
+    "sl": 0.0000650331,
+    "openTime": 1745631696769
+  },
+  {
+    "symbol": "FLOKIUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00008371,
+    "tp": 0.0000853842,
+    "sl": 0.0000828729,
+    "openTime": 1745631696770
+  },
+  {
+    "symbol": "AIXBTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.1322,
+    "tp": 0.13484400000000002,
+    "sl": 0.13087800000000002,
+    "openTime": 1745631696771
+  },
+  {
+    "symbol": "PEOPLEUSDT",
+    "direction": "buy",
+    "entryPrice": 0.01554,
+    "tp": 0.0158508,
+    "sl": 0.0153846,
+    "openTime": 1745631696772
+  },
+  {
+    "symbol": "TUTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.02795,
+    "tp": 0.028509,
+    "sl": 0.027670499999999997,
+    "openTime": 1745631696773,
+    "closePrice": 0.02767,
+    "closeTime": 1745631849667,
+    "pnlPct": -1,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "WIFUSDT",
+    "direction": "buy",
+    "entryPrice": 0.683,
+    "tp": 0.6966600000000001,
+    "sl": 0.67617,
+    "openTime": 1745631696774,
+    "closePrice": 0.697,
+    "closeTime": 1745632095141,
+    "pnlPct": 2.05,
+    "result": "TP/SL"
+  },
+  {
+    "symbol": "1000SATSUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0000501,
+    "tp": 0.000051102,
+    "sl": 0.000049599,
+    "openTime": 1745631696775
+  },
+  {
+    "symbol": "TURBOUSDT",
+    "direction": "buy",
+    "entryPrice": 0.004609,
+    "tp": 0.00470118,
+    "sl": 0.00456291,
+    "openTime": 1745631996949
+  },
+  {
+    "symbol": "NOTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.002498,
+    "tp": 0.0025479599999999997,
+    "sl": 0.00247302,
+    "openTime": 1745631996950
+  },
+  {
+    "symbol": "CKBUSDT",
+    "direction": "buy",
+    "entryPrice": 0.005371,
+    "tp": 0.00547842,
+    "sl": 0.00531729,
+    "openTime": 1745631996951
+  },
+  {
+    "symbol": "SHIBUSDT",
+    "direction": "buy",
+    "entryPrice": 0.00001478,
+    "tp": 0.000015075600000000002,
+    "sl": 0.0000146322,
+    "openTime": 1745631996952
+  },
+  {
+    "symbol": "ALTUSDT",
+    "direction": "buy",
+    "entryPrice": 0.03247,
+    "tp": 0.0331194,
+    "sl": 0.0321453,
+    "openTime": 1745631996952
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "direction": "buy",
+    "entryPrice": 0.189,
+    "tp": 0.19278,
+    "sl": 0.18711,
+    "openTime": 1745631996957
+  },
+  {
+    "symbol": "XAIUSDT",
+    "direction": "buy",
+    "entryPrice": 0.0658,
+    "tp": 0.067116,
+    "sl": 0.06514199999999999,
+    "openTime": 1745631996958
+  },
+  {
+    "symbol": "JASMYUSDT",
+    "direction": "buy",
+    "entryPrice": 0.01846,
+    "tp": 0.0188292,
+    "sl": 0.0182754,
+    "openTime": 1745631996960
+  }
+]

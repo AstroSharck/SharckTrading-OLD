@@ -1,5 +1,6 @@
 const checkVolatility = require('./volatilityChecker');
 const fetchNews = require('./newsFetcher');
+const { DEBUG_MODE } = require('../config/config');
 
 async function isMarketScalpable({ verbose = true } = {}) {
     // 1. Analyse news
@@ -12,13 +13,15 @@ async function isMarketScalpable({ verbose = true } = {}) {
     const avgVolatility = fullScan.reduce((a, b) => a + b.volatility, 0) / fullScan.length;
 
     if (verbose) {
-        console.log("🧠 Vérification du contexte marché...");
-        console.log("📰 News ok :", true);
-        console.log("📈 Volatilité moyenne :", avgVolatility.toFixed(2) + "%");
-        console.log("💥 Actifs scalpables :", scalpables.length);
+        if (DEBUG_MODE) {
+            console.log("🧠 Vérification du contexte marché...");
+            console.log("📰 News ok :", true);
+            console.log("📈 Volatilité moyenne :", avgVolatility.toFixed(2) + "%");
+            console.log("💥 Actifs scalpables :", scalpables.length);
+        }
     }
-
-    const marketOk = /* marketIsStable && */ avgVolatility >= 1 && scalpables.length >= 10;
+    const marketOk = true && /* marketIsStable && */ avgVolatility >= 1 && scalpables.length >= 10;
+    console.log("📊 Marché ok :", marketOk);
     return { marketOk, avgVolatility, scalpables };
 }
 

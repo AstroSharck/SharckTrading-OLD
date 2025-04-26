@@ -33,7 +33,7 @@
 - [ ] Interface CLI `--backtest` avec sélection d’actif et période
 
 ## 📚 Phase 7 – Logs & Apprentissage
-- [ ] `learning/tradeLogger.js` – Log des trades exécutés
+- [x] `learning/tradeLogger.js` – Log des trades exécutés
 - [ ] `learning/tradeMemory.js` – Mémoire interne des décisions
 - [ ] `learning/mistakeAnalyzer.js` – Analyse d’erreurs et d’opportunités manquées
 

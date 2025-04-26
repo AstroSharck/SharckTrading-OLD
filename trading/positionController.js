@@ -1,3 +1,6 @@
+const { logTradeOpen } = require('./tradeLogger');
+const { logTradeClose } = require('../trading/tradeLogger');
+
 const openPositions = new Map();
 
 function openPosition(symbol, direction, entryPrice, options = {}) {
@@ -6,8 +9,8 @@ function openPosition(symbol, direction, entryPrice, options = {}) {
         return;
     }
 
-    const tpPct = options.tp || 2;    // % take-profit
-    const slPct = options.sl || 1;    // % stop-loss
+    const tpPct = options.tp || 2; // future évolution ici : adaptatif
+    const slPct = options.sl || 1;
 
     const tp = direction === 'buy'
         ? entryPrice * (1 + tpPct / 100)
@@ -25,8 +28,18 @@ function openPosition(symbol, direction, entryPrice, options = {}) {
         openTime: Date.now()
     });
 
+    logTradeOpen({
+        symbol,
+        direction,
+        entryPrice,
+        tp,
+        sl,
+        openTime: Date.now()
+    });
+
     console.log(`🟢 Position ouverte sur ${symbol} (${direction}) à ${entryPrice} | TP: ${tp.toFixed(8)} | SL: ${sl.toFixed(8)}`);
 }
+
 
 
 function closePosition(symbol, exitPrice) {
@@ -46,6 +59,8 @@ function closePosition(symbol, exitPrice) {
 
     console.log(`🔴 Position fermée sur ${symbol} à ${exitPrice}`);
     console.log(`📊 PnL ${pnl >= 0 ? '+' : ''}${pnl} (${pnlPct}%)`);
+
+    logTradeClose(symbol, exitPrice, pnlPct, 'TP/SL');
 
     openPositions.delete(symbol);
 }

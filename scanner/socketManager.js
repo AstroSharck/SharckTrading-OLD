@@ -1,5 +1,6 @@
 const WebSocket = require('ws');
 const { getAllOpenPositions, closePosition, isPositionOpen } = require('../trading/positionController');
+const { DEBUG_MODE } = require('../config/config');
 
 const activeSockets = new Map();
 
@@ -14,7 +15,9 @@ function startWebSocketFor(symbol, onData) {
     const ws = new WebSocket(wsUrl);
 
     ws.on('open', () => {
-        console.log(`🔌 WebSocket ouvert pour ${symbol}`);
+        if (DEBUG_MODE) {
+            console.log(`✅ WebSocket ouvert pour ${symbol}`);
+        }
     });
 
     ws.on('message', (data) => {
@@ -43,7 +46,9 @@ function stopWebSocketFor(symbol) {
     if (ws) {
         ws.close();
         activeSockets.delete(symbol);
-        console.log(`🛑 Fermeture WebSocket pour ${symbol}`);
+        if (DEBUG_MODE) {
+            console.log(`🛑 Fermeture WebSocket pour ${symbol}`);
+        }
     }
 }
 

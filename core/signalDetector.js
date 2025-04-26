@@ -1,54 +1,54 @@
-function analyzeIndicators({ price, ema9, ema21, rsi, vwap }) {
-    // 🔁 Sanity check
-    if ([price, ema9, ema21, rsi, vwap].some(v => v === undefined || isNaN(v))) {
-        return {
-            error: true,
-            reason: "Données incomplètes ou invalides"
-        };
-    }
+function analyzeIndicators({ price, ema9, ema21, rsi, vwap, candles = [], volume, globalMarketIsGood = true }) {
+    const result = {
+        trend: ema9 > ema21 ? 'up' : 'down',
+        positionVsVWAP: price > vwap ? 'above' : 'below',
+        rsiSignal: rsi > 70 ? 'overbought' : rsi < 30 ? 'oversold' : 'neutral',
+        rsi, // 🔥 ajoute RSI brut au retour pour tryEnterTrade
+    };
 
-    // 📈 Détection de la tendance via EMA
-    const trend =
-        ema9 > ema21 ? 'up' :
-            ema9 < ema21 ? 'down' :
-                'neutral';
+    let trendScore = 0;
+    let momentumScore = 0;
+    let timingScore = 0;
+    let contextScore = 0;
 
-    // 📊 Position du prix par rapport au VWAP
-    const positionVsVWAP =
-        price > vwap ? 'above' :
-            price < vwap ? 'below' :
-                'on';
+    // TREND
+    if (ema9 > ema21) trendScore++;
+    if (Math.abs(ema9 - ema21) / ema21 > 0.002) trendScore++;
+    if (price > vwap) trendScore++;
 
-    // 💪 Interprétation RSI
-    const rsiSignal =
-        rsi >= 70 ? 'overbought' :
-            rsi <= 30 ? 'oversold' :
-                'neutral';
+    // MOMENTUM
+    if (rsi > 50 && rsi < 65) momentumScore++;
+    const lastCandle = candles[candles.length - 1];
+    const body = Math.abs(lastCandle.close - lastCandle.open);
+    const range = lastCandle.high - lastCandle.low;
+    if (body / range > 0.5 && lastCandle.close > lastCandle.open) momentumScore++;
+    if (volume && lastCandle.volume > lastCandle.volumeAvg) momentumScore++;
 
-    // 🧠 Détection de setup possible pour un BUY
-    const readyToBuy =
-        trend === 'up' &&
-        positionVsVWAP === 'above' &&
-        rsi > 35 && rsi < 70;
+    // TIMING
+    if (body / range > 0.3 && range > 0.002 * lastCandle.close) timingScore++;
+    if (candles.slice(-3).some(c => c.close > c.open)) timingScore++;
 
-    // 🧠 Détection de setup possible pour un SELL
-    const readyToSell =
-        trend === 'down' &&
-        positionVsVWAP === 'below' &&
-        rsi < 65 && rsi > 30;
+    // CONTEXTE
+    if (globalMarketIsGood) contextScore++;
+    if (lastCandle.volatilityScore > 0.5) contextScore++;
+
+    const totalScore = trendScore + momentumScore + timingScore + contextScore;
+
+    const summary =
+        totalScore >= 7 ? '✅ BUY' :
+            totalScore >= 5 ? '❌ WAIT' :
+                '⚠️ SELL';
 
     return {
-        price,
-        ema9,
-        ema21,
-        rsi,
-        vwap,
-        trend,
-        positionVsVWAP,
-        rsiSignal,
-        readyToBuy,
-        readyToSell,
-        summary: readyToBuy ? '✅ BUY' : readyToSell ? '⚠️ SELL' : '❌ WAIT'
+        ...result,
+        trendScore,
+        momentumScore,
+        timingScore,
+        contextScore,
+        totalScore,
+        summary,
+        readyToBuy: summary === '✅ BUY',
+        readyToSell: summary === '⚠️ SELL'
     };
 }
 
